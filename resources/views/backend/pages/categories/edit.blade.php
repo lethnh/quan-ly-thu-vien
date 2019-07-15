@@ -1,0 +1,19 @@
+@extends('backend.layouts.app')
+
+@section('content')
+<div class="page">
+    <div class="page-content container-fluid">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">New User
+                </h3>
+            </div>
+            <div class="panel-body">
+                <form action="" method="post" enctype="multipart/form-data">
+                    @include('backend.pages.categories._form', ['buttonTitle'=>'Update'])
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
