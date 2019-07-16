@@ -11,9 +11,11 @@
 |
 */
 
-Auth::routes();
+// Auth::routes();
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+Route::get('login', '\App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'is.admin']], function () {
     Route::group(['prefix' => 'admin'], function () {
         Route::get('/', function () {
             return view('backend.pages.dashboard');
