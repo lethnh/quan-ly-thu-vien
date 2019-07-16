@@ -14,7 +14,8 @@
     <div class="main-menu">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="index.html"><img src="{{asset('html/images/logo.png')}}" alt="logo"></a>
+                <a class="navbar-brand" href="{!! url('/') !!}"><img src="{{asset('html/images/logo.png')}}"
+                        alt="logo"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -34,9 +35,24 @@
                         <li class="navbar-item">
                             <a href="faq.html" class="nav-link">FAQ</a>
                         </li>
+                        @if (Auth::user())
+                        <div class="dropdown">
+                            <li class="navbar-item" id="dropdownMenuButton" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <a href="{{ route('login') }}" class="nav-link">{{ Auth::user()->name }}</a>
+                            </li>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+                            </div>
+                        </div>
+
+                        @else
                         <li class="navbar-item">
                             <a href="{{ route('login') }}" class="nav-link">Login</a>
                         </li>
+                        @endif
                     </ul>
                     <div class="cart my-2 my-lg-0">
                         <span>

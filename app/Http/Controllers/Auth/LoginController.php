@@ -27,13 +27,13 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
-    // /**
-    //  * Create a new controller instance.
-    //  *
-    //  * @return void
-    //  */
+    // // /**
+    // //  * Create a new controller instance.
+    // //  *
+    // //  * @return void
+    // //  */
     // public function __construct()
     // {
     //     $this->middleware('guest')->except('logout');
@@ -48,5 +48,19 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         return view('frontend.pages.login');
+    }
+
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+
+        if ($this->attemptLogin($request)) {
+            if (Auth::user()->role === 1) {
+                return redirect('/admin');
+            } else {
+                return redirect('/');
+            }
+        }
+        return $this->sendFailedLoginResponse($request);
     }
 }

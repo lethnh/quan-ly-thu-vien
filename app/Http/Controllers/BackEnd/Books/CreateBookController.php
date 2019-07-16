@@ -21,6 +21,10 @@ class CreateBookController extends Controller
     {
         $validated = $request->validated();
         if ($validated) {
+            if ($request->hasFile('images')) {
+                // Storage::delete('public/' . $path);
+                $path = Storage::disk('public')->put('book/image', $request->file('images'));
+            }
             Book::create([
                 'name' => $request->name,
                 'author' => $request->author,
@@ -28,6 +32,7 @@ class CreateBookController extends Controller
                 'amount' => $request->amount,
                 'category_id' => $request->category,
                 'isbn' => $request->isbn,
+                'images' => $request->path,
             ]);
             return redirect('admin/book')->with('success', 'Book has been created');
         }

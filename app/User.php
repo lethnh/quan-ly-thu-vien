@@ -70,4 +70,15 @@ class User extends Authenticatable
     {
         return null !== $this->roles()->where('name', $role)->first();
     }
+
+    public function getAvatarUrlAttribute()
+    {
+        if (empty($this->avatar)) {
+            return null;
+        }
+        if (strpos($this->avatar, 'https://') !== false) {
+            return $this->avatar;
+        }
+        return url('storage/' . $this->avatar);
+    }
 }

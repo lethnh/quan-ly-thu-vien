@@ -20,6 +20,5 @@ class IsAdmin
             return $next($request);
         }
         return redirect()->route('login');
-        // $request->user()->authorizeRoles(['admin']);
     }
 }
